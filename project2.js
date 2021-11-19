@@ -13,7 +13,7 @@ Display.prototype.add = function (book) {
   let tableBody = document.getElementById("tableBody");
   let uistring = `
                 <tr>
-                    <td>${book.No}</td>
+                    
                     <td>${book.name}</td>
                     <td>${book.author}</td>
                     <td>${book.type}</td>
@@ -33,14 +33,14 @@ Display.prototype.validate = function (book) {
 };
 Display.prototype.show = function (type, displaymessage) {
   let message = document.getElementById("message");
-  message.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+  message.innerHTML = `<div class=" alert alert-${type} alert-dismissible fade show" role="alert">
     <strong>message</strong>${displaymessage}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div> `;
+  setTimeout(function () {
+    message.innerHTML = "";
+  }, 1000);
 };
-setTimeout(function () {
-  message.innerHTML = "";
-}, 2000);
 
 let libraryForm = document.getElementById("libraryForm");
 libraryForm.addEventListener("submit", libraryFormSumit);
@@ -72,6 +72,7 @@ function libraryFormSumit(e) {
 
   let display = new Display();
   if (display.validate(book)) {
+    console.log("click");
     display.add(book);
     display.clear();
     display.show("success", " Your book has been sucessfully added");
